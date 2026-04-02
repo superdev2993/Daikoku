@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.pytest_cache/
+.coverage
+
+# Data
+*.csv
+data/*
+!data/BTC_1h_agg.csv
+!tests/data/test_Dataset.csv
+
+# Training outputs (heavy)
+/models/
+/runs/
+logs/
+
+# Generated reports / visualizations
+/evaluation/
+/visualizations/
+test_*.html
+
+# Optuna
+/optimize/
+
+# IDE
+.vscode/
+.idea/
+
+# Internal / not published
+claudedocs/
+CLAUDE.md
+scripts/
+.playwright-mcp/
