@@ -147,7 +147,7 @@ LABEL_CONFIDENCE_CURVE = "sqrt"   # "linear" (1-t/H) or "sqrt" (sqrt(1-t/H)) —
 
 # Focal: down-weights easy examples (high confidence predictions)
 # gamma=0 → standard CE, gamma=2 → strong focal effect
-FOCAL_GAMMA = 0
+FOCAL_GAMMA = 2
 
 # Class weighting: compensates class imbalance (computed dynamically from label distribution)
 # alpha=0 → no weighting, alpha=0.5 → sqrt inverse freq (soft), alpha=1.0 → full inverse freq

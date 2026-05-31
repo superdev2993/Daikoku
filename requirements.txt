@@ -21,6 +21,8 @@ scikit-learn==1.8.0
 optuna==4.7.0
 
 # Visualization and Logging
+# setuptools<81 required: tensorboard 2.20 uses pkg_resources (removed in setuptools 82+)
+setuptools>=65,<81
 tensorboard==2.20.0
 matplotlib==3.10.8
 plotly==6.5.2
