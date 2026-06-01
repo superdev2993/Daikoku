@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 
 from modules.utils.logger import get_logger
+from modules.utils.ccxt_proxy import merge_proxy_config
 
 logger = get_logger(__name__)
 
@@ -44,11 +45,11 @@ def _instantiate_exchange(name):
     Duplicated from modules/tools/download_candles.py (kept separate for isolation).
     """
     if name == 'binance':
-        exchange = ccxt.binance({'options': {'defaultType': 'future'}})
+        exchange = ccxt.binance(merge_proxy_config({'options': {'defaultType': 'future'}}))
     elif name == 'bybit':
-        exchange = ccxt.bybit({'options': {'defaultType': 'future'}})
+        exchange = ccxt.bybit(merge_proxy_config({'options': {'defaultType': 'future'}}))
     elif name == 'bitget':
-        exchange = ccxt.bitget({'options': {'defaultType': 'swap'}})
+        exchange = ccxt.bitget(merge_proxy_config({'options': {'defaultType': 'swap'}}))
     else:
         raise ValueError(f"Unsupported exchange: {name}")
 

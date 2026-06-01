@@ -89,7 +89,7 @@ GATE_BOTTLENECK = 64              # Bottleneck size for V3 gate MLP — ignored 
 # TRAINING
 # ============================================
 
-EPOCHS = 6
+EPOCHS = 50
 
 DEVICE = "auto"             # auto, cuda, cpu (very slower)
 DROPOUT = 0.1               # Dropout rate in Mamba blocks
@@ -204,7 +204,7 @@ AUGMENT_PCT = 50        # Base %: open/close = OU(max(PCT% body, 0.1% price)), w
 # EVALUATION
 # ============================================
 EVAL_CHECKPOINT = "models/latest.pt"          # Checkpoint to evaluate
-EVAL_DATA_FILE = "data/BTC_1h_agg.csv"        # Dataset (can differ from training data)
+EVAL_DATA_FILE = "data/BTC_1h_3y.csv"        # Dataset (can differ from training data)
 EVAL_SPLIT = "test"                           # "train", "test", "all"
 EVAL_BATCH_SIZE = 512                         # Batch size for evaluation inference
 EVAL_GENERATE_PLOTS = True                    # Generate visualizations
@@ -212,6 +212,16 @@ EVAL_ACCURACY_WINDOW = 100                    # Window size for accuracy timelin
 EVAL_INFERENCE_ONLY = False                   # Inference-only mode (no labels, no metrics)
 EVAL_OUTPUT_DIR = "evaluation/"               # Output directory for evaluation results
 EVAL_MIXED_PRECISION = False                  # True = fp16, False = fp32 (full precision)
+
+# ============================================
+# HTTP PROXY (ccxt: download_candles.py, live feed)
+# Host/port/credentials: project-root .env or shell exports
+#   cp .env.example .env   # then edit .env
+# Optional in .env or shell: PROXY_ENABLED, PROXY_TYPE
+# Requires: pip install PySocks
+# ============================================
+PROXY_ENABLED = True
+PROXY_TYPE = "socks5"
 
 # ============================================
 # LIVE INFERENCE

@@ -20,13 +20,19 @@ from tqdm import tqdm
 import math
 import argparse
 import sys
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from modules.utils.ccxt_proxy import merge_proxy_config
 
 # API key configuration via environment variables.
 # Set them in your shell or .env file (never commit secrets to code).
 # Example:  export BINANCE_API_KEY=xxx  BINANCE_SECRET=yyy
 # WARNING: Bitget REQUIRES API keys to access historical data!
 # Without API keys, Bitget only returns ~100 recent candles.
-import os
 API_KEYS = {
     'binance': {
         'apiKey': os.environ.get('BINANCE_API_KEY', ''),
@@ -64,16 +70,16 @@ def instantiate_exchange(name):
 
     if name == 'binance':
         params = {'options': {'defaultType': 'future'}}
-        exchange = ccxt.binance({**api_config, **params})
+        exchange = ccxt.binance(merge_proxy_config({**api_config, **params}))
     elif name == 'bybit':
         params = {'options': {'defaultType': 'future'}}
-        exchange = ccxt.bybit({**api_config, **params})
+        exchange = ccxt.bybit(merge_proxy_config({**api_config, **params}))
     elif name == 'bitget':
         # Use 'swap' for Bitget perpetual futures
         params = {'options': {'defaultType': 'swap'}}
-        exchange = ccxt.bitget({**api_config, **params})
+        exchange = ccxt.bitget(merge_proxy_config({**api_config, **params}))
     elif name == 'kucoin':
-        exchange = ccxt.kucoinfutures(api_config)
+        exchange = ccxt.kucoinfutures(merge_proxy_config(api_config))
     else:
         raise ValueError(f"Unsupported exchange: {name}")
 
