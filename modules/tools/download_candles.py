@@ -27,6 +27,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from modules.utils.ccxt_proxy import merge_proxy_config
+from modules.utils.timeframes import TIMEFRAMES, timeframe_to_ms
 
 # API key configuration via environment variables.
 # Set them in your shell or .env file (never commit secrets to code).
@@ -55,7 +56,6 @@ API_KEYS = {
 }
 
 SUPPORTED_EXCHANGES = ['binance', 'bybit', 'bitget', 'kucoin']
-TIMEFRAMES = ['5m', '15m', '30m', '1h', '2h', '4h', '1d']
 # Bitget constant: max window 90 days in ms
 BITGET_MAX_WINDOW_MS = 90 * 24 * 60 * 60 * 1000
 
@@ -151,20 +151,6 @@ def get_market_listing_time(exchange, symbol):
             except Exception:
                 continue
     return None
-
-def timeframe_to_ms(timeframe):
-    mapping = {
-        '5m': 5 * 60 * 1000,
-        '15m': 15 * 60 * 1000,
-        '30m': 30 * 60 * 1000,
-        '1h': 60 * 60 * 1000,
-        '2h': 2 * 60 * 60 * 1000,
-        '4h': 4 * 60 * 60 * 1000,
-        '1d': 24 * 60 * 60 * 1000,
-    }
-    if timeframe not in mapping:
-        raise ValueError(f"Unsupported timeframe: {timeframe}")
-    return mapping[timeframe]
 
 def fetch_ohlcv_bitget(exchange, symbol, timeframe, since, until=None, limit=200, sleep=1):
     """Specialized fetch for Bitget with improved handling."""

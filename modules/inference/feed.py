@@ -16,27 +16,9 @@ import pandas as pd
 
 from modules.utils.logger import get_logger
 from modules.utils.ccxt_proxy import merge_proxy_config
+from modules.utils.timeframes import timeframe_to_ms, timeframe_to_seconds
 
 logger = get_logger(__name__)
-
-
-def timeframe_to_ms(timeframe):
-    """Convert timeframe string to milliseconds."""
-    mapping = {
-        '5m': 5 * 60 * 1000,
-        '15m': 15 * 60 * 1000,
-        '1h': 60 * 60 * 1000,
-        '4h': 4 * 60 * 60 * 1000,
-        '1d': 24 * 60 * 60 * 1000,
-    }
-    if timeframe not in mapping:
-        raise ValueError(f"Unsupported timeframe: {timeframe}")
-    return mapping[timeframe]
-
-
-def timeframe_to_seconds(timeframe):
-    """Convert timeframe string to seconds."""
-    return timeframe_to_ms(timeframe) // 1000
 
 
 def _instantiate_exchange(name):

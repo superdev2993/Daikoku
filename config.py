@@ -228,7 +228,7 @@ PROXY_TYPE = "socks5"
 # ============================================
 LIVE_EXCHANGE = "binance"      # "binance" / "bybit" / "bitget"
 LIVE_SYMBOL = "BTC/USDT"
-LIVE_TIMEFRAME = "1h"          # Supported: 5m, 15m, 1h, 4h, 1d
+LIVE_TIMEFRAME = "1h"          # Supported: 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d
 LIVE_BUFFER_SIZE = 2000        # Raw candles to maintain (min ~1000 for dual TF)
 LIVE_CHECKPOINT = "models/latest.pt"
 LIVE_HTTP_PORT = 7777

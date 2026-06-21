@@ -694,16 +694,20 @@ class TestFeed:
         assert timeframe_to_ms('15m') == 15 * 60 * 1000
         assert timeframe_to_ms('1h') == 60 * 60 * 1000
         assert timeframe_to_ms('4h') == 4 * 60 * 60 * 1000
+        assert timeframe_to_ms('6h') == 6 * 60 * 60 * 1000
+        assert timeframe_to_ms('8h') == 8 * 60 * 60 * 1000
+        assert timeframe_to_ms('12h') == 12 * 60 * 60 * 1000
 
     def test_timeframe_to_seconds(self):
         from modules.inference.feed import timeframe_to_seconds
         assert timeframe_to_seconds('15m') == 900
         assert timeframe_to_seconds('1h') == 3600
+        assert timeframe_to_seconds('12h') == 43200
 
     def test_invalid_timeframe(self):
         from modules.inference.feed import timeframe_to_ms
         with pytest.raises(ValueError):
-            timeframe_to_ms('2h')
+            timeframe_to_ms('16h')
 
     def test_invalid_pair_format(self):
         from modules.inference.feed import _find_symbol, _instantiate_exchange

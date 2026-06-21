@@ -23,6 +23,7 @@ import pandas as pd
 import config
 from modules.inference.engine import PredictionEngine
 from modules.inference.feed import CandleFeed, timeframe_to_seconds
+from modules.utils.timeframes import TIMEFRAMES
 from modules.inference.tracker import TradeTracker
 from modules.inference.dashboard import LiveDashboard
 from modules.data.labeling import REJECT_CLASS
@@ -36,6 +37,7 @@ def parse_args():
     parser.add_argument('--pair', type=str, default=config.LIVE_SYMBOL,
                         help=f'Trading pair (default: {config.LIVE_SYMBOL})')
     parser.add_argument('--timeframe', type=str, default=config.LIVE_TIMEFRAME,
+                        choices=TIMEFRAMES,
                         help=f'Timeframe (default: {config.LIVE_TIMEFRAME})')
     parser.add_argument('--checkpoint', type=str, default=config.LIVE_CHECKPOINT,
                         help=f'Model checkpoint (default: {config.LIVE_CHECKPOINT})')
